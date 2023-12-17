@@ -17,7 +17,8 @@ Route::get('/404', function () {
     return view('pages.404');
 })->name('404');
 
-
+Route::get('/web3-login-message', 'Web3LoginController@message');
+Route::post('/web3-login-verify', 'Web3LoginController@verify');
 
 // Protected routes that require authentication
 Route::middleware(['auth', 'RoleCheck'])->group(function () {
