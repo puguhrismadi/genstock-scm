@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserControlle;
+use App\Http\Controllers\MetamaskController;
 
 // Route to show the login form
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
@@ -19,7 +20,7 @@ Route::get('/404', function () {
 
 Route::get('/web3-login-message', 'Web3LoginController@message');
 Route::post('/web3-login-verify', 'Web3LoginController@verify');
-
+Route::post('/metamask', [MetamaskController::class,'handle']);
 // Protected routes that require authentication
 Route::middleware(['auth', 'RoleCheck'])->group(function () {
     // Route for the admin dashboard

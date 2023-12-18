@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SOUSS MASSA</title>
+    <title>SCM</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -21,6 +21,7 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
     defer
   ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.js" integrity="sha512-VXYCt0jMr6DROBy4lTfWKAXLpS4SqACe2MNGXP5oebrgjXkK4wtslrc0L8/POJGWcHAHCzEmgN4/MbU2vGik5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
   </head>
   <body>
@@ -37,7 +38,7 @@
             class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
           >
-            SOUSS MASSA
+            SupplyChain
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -163,7 +164,7 @@
             class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
           >
-            SOUSS MASSA
+            SupplyChain
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -255,8 +256,30 @@
                 <span class="ml-4">Refused Demandes</span>
               </a>
             </li>
+            <li> <button onclick="addEthereumChain()">Add Network Chain</button></li>
             
           </ul>
+         
+
+<script>
+  function addEthereumChain() {
+    ethereum
+      .request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: 5777,
+            chainName: 'Localhost 8545',
+            blockExplorerUrls: ['https://localhost:8545'],
+            nativeCurrency: { symbol: 'ETH', decimals: 18 },
+            rpcUrls: ['https://localhost:8545/'],
+          },
+        ],
+      })
+      .then((res) => console.log('add', res))
+      .catch((e) => console.log('ADD ERR', e));
+  }
+</script>
         </div>
       </aside>
 

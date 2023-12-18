@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SOUSS MASSA</title>
+    <title>SCM</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -21,7 +21,7 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
     defer
   ></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
   </head>
   <body>
     <div
@@ -37,7 +37,7 @@
             class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
           >
-            SOUSS MASSA
+            SupplyChain
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -173,13 +173,61 @@
                 </svg>
                 <span class="ml-4">Refused Demand</span>
               </a>
+                {{-- <li><button onclick="addEthereumChain()">Add Network Chain</button></li> --}}
+                <button id="idWallet" onclick="getEthereumAddress()" class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit">Get Connected Wallet</button>
+                
             </li>
+           
            
           </ul>
           
           
         </div>
       </aside>
+      <script>
+          async function getEthereumAddress() {
+    // Check if MetaMask is installed
+    if (window.ethereum) {
+      try {
+        // Request access to the user's accounts
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+        // Get the user's Ethereum address
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+
+        // Display the address
+       // alert('Ethereum Address: ' + accounts[0]);
+       myWallet = document.getElementById('idWallet');
+       address = document.getElementById('addressWallet');
+       myWallet.innerHTML= "Connected Wallet : "+accounts[0];
+       //address.innerHTML = accounts[0];
+      } catch (error) {
+        console.error('Error getting Ethereum address:', error);
+      }
+    } else {
+      alert('MetaMask is not installed. Please install MetaMask and try again.');
+    }
+  }
+        const decimalNumber = 1337;
+        const hexadecimalValue = decimalNumber.toString(16);
+        function addEthereumChain() {
+          ethereum
+            .request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainId: '0x539',
+                  chainName: 'Localhost 5545',
+                  blockExplorerUrls: ['https://127.0.0.1:5545'],
+                  nativeCurrency: { symbol: 'ETH', decimals: 18 },
+                  rpcUrls: ['https://127.0.0.1:5545/'],
+                },
+              ],
+            })
+            .then((res) => console.log('add', res))
+            .catch((e) => console.log('ADD ERR', e));
+        }
+      </script>
       <!-- Mobile sidebar -->
       <!-- Backdrop -->
       <div
