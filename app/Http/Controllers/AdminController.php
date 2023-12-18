@@ -76,9 +76,9 @@ class AdminController extends Controller
         if ($demande) {
             $demande->status = 'refused';
             $demande->save();
-            return redirect()->route('admin_dashboard.demandes')->with('success', 'Demande refused successfully.');
+            return redirect()->route('admin_dashboard.demandes')->with('success', 'Demand refused successfully.');
         } else {
-            return redirect()->route('admin_dashboard.demandes')->with('error', 'Demande not found.');
+            return redirect()->route('admin_dashboard.demandes')->with('error', 'Demand not found.');
         }
     }
     

@@ -55,7 +55,7 @@
             <p
               class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              Pending Demandes
+              Pending Demand
             </p>
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
@@ -83,7 +83,7 @@
             <p
               class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              Accepted Demandes
+              Accepted Demand
             </p>
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
@@ -116,7 +116,7 @@
             <p
               class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              Refused Demandes
+              Refused Demand
             </p>
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
@@ -156,7 +156,7 @@
                     >
                       <img
                         class="object-cover w-full h-full rounded-full"
-                        src="{{ asset('storage/images/'.$user->image) }}"
+                        src="{{$user->image }}"
                         alt=""
                         loading="lazy"
                       />

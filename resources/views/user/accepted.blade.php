@@ -9,7 +9,7 @@
       <h4
         class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
       >
-        Accceped Demandes
+        Accceped Demand
       </h4>
       @if(session('success'))
             <div class="bg-green-100 text-center border border-green-400 text-green-700 px-4 py-2 mt-4">
@@ -24,7 +24,7 @@
                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
               >
                 <th class="px-4 py-3">Client</th>
-                <th class="px-4 py-3">Produit</th>
+                <th class="px-4 py-3">Product</th>
                 <th class="px-4 py-3">service</th>
                 <th class="px-4 py-3">Quantity</th>
                 <th class="px-4 py-3">Status</th>
