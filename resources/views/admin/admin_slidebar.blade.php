@@ -174,7 +174,7 @@
                 <span class="ml-4">Refused Demand</span>
               </a>
                 {{-- <li><button onclick="addEthereumChain()">Add Network Chain</button></li> --}}
-                <button id="idWallet" onclick="getEthereumAddress()" class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit">Get Connected Wallet</button>
+               
                 
             </li>
            
@@ -186,28 +186,38 @@
       </aside>
       <script>
           async function getEthereumAddress() {
-    // Check if MetaMask is installed
-    if (window.ethereum) {
-      try {
-        // Request access to the user's accounts
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        // Check if MetaMask is installed
+        if (window.ethereum) {
+          try {
+            // Request access to the user's accounts
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-        // Get the user's Ethereum address
-        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+            // Get the user's Ethereum address
+            const accounts = await window.ethereum.request({ method: 'eth_accounts' });
 
-        // Display the address
-       // alert('Ethereum Address: ' + accounts[0]);
-       myWallet = document.getElementById('idWallet');
-       address = document.getElementById('addressWallet');
-       myWallet.innerHTML= "Connected Wallet : "+accounts[0];
-       //address.innerHTML = accounts[0];
-      } catch (error) {
-        console.error('Error getting Ethereum address:', error);
+            // Display the address
+          // alert('Ethereum Address: ' + accounts[0]);
+          myWallet = document.getElementById('idWallet');
+          address = document.getElementById('addressWallet');
+          myWallet.innerHTML= "Connected Wallet : "+accounts[0];
+          
+          const userAddress = accounts[0];
+          //account 
+          // Membuat objek web3 dengan provider rpc lokal
+          let web3 = new Web3 ('http://localhost:5545');
+
+          // Mendapatkan alamat akun metamask yang aktif
+          let clickaccounts = await web3.eth.getAccounts ();
+          let clickaddress = accounts [0];
+          console.log(clickaccounts);
+          //address.innerHTML = accounts[0];
+          } catch (error) {
+            console.error('Error getting Ethereum address:', error);
+          }
+        } else {
+          alert('MetaMask is not installed. Please install MetaMask and try again.');
+        }
       }
-    } else {
-      alert('MetaMask is not installed. Please install MetaMask and try again.');
-    }
-  }
         const decimalNumber = 1337;
         const hexadecimalValue = decimalNumber.toString(16);
         function addEthereumChain() {
@@ -227,6 +237,8 @@
             .then((res) => console.log('add', res))
             .catch((e) => console.log('ADD ERR', e));
         }
+        //get balance
+     
       </script>
       <!-- Mobile sidebar -->
       <!-- Backdrop -->
@@ -431,7 +443,8 @@
             </button>
             <!-- Search input -->
             <div class="flex justify-center flex-1 lg:mr-32">
-              <div
+              <button id="idWallet" onclick="getEthereumAddress()" class="w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit">Get Connected Wallet</button>
+              {{-- <div
                 class="relative w-full max-w-xl mr-6 focus-within:text-purple-500"
               >
                 <div class="absolute inset-y-0 flex items-center pl-2">
@@ -454,7 +467,7 @@
                   placeholder="Search for projects"
                   aria-label="Search"
                 />
-              </div>
+              </div> --}}
             </div>
             <ul class="flex items-center flex-shrink-0 space-x-6">
               <!-- Theme toggler -->
