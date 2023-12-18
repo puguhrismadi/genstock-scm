@@ -1,7 +1,56 @@
 @extends('admin.admin_slidebar')
 
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
+<script>
+          async function getEthereumAddress() {
+    // Check if MetaMask is installed
+    if (window.ethereum) {
+      try {
+        // Request access to the user's accounts
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        let web3 = new Web3 ('http://localhost:5545');
 
+        // Get the user's Ethereum address
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+
+        // Display the address
+       // alert('Ethereum Address: ' + accounts[0]);
+       myWallet = document.getElementById('idWallet');
+       Alladdress = document.getElementById('userList');
+       let Allaccounts = await web3.eth.getAccounts ();
+         // Get the container element
+         // Get the container element
+            const userList = document.getElementById('userList');
+
+          // Create a Tailwind list group
+          const listGroup = document.createElement('ol');
+          listGroup.classList.add('list-decimal', 'p-2');
+
+          // Iterate through the Allaccounts array and create list items
+          Allaccounts.forEach(account => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('mb-2');
+            
+            listItem.textContent = account;
+            listGroup.appendChild(listItem);
+          });
+
+          // Append the list group to the container
+          userList.appendChild(listGroup);
+                      //account 
+    
+      } catch (error) {
+        console.error('Error getting Ethereum address:', error);
+      }
+    } else {
+      alert('MetaMask is not installed. Please install MetaMask and try again.');
+    }
+  }
+  //prevent buttonn click twice 
+  
+  </script>
+  
 <main class="h-full pb-16 overflow-y-auto">
     <div class="container grid px-6 mx-auto">
       
@@ -151,7 +200,39 @@
             </span>
           
         </div>
+        <div class="col-md-6">
+          <div id="postlist">
+          </div>
+          
+      </div>
+      <div class="col-md-6">
+        <div class="panel">
+          <div class="panel-heading">
+              <div class="text-center">
+                  <div class="row">
+                      <div class="col-sm-9">
+                          <h3 class="pull-left">Local Service Ethereum Network user</h3>
+                      </div>
+                      <div class="col-sm-3">
+                          <h4 class="pull-right">
+                          <small><em>user Blockchain List</em></small>
+                          </h4>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+          
+      </div>
       
+      
+  </div>
+  
+ 
+</div>
+        <div id="userList" class="container">
+
+      </div>
       </div>
     </div>
   </main>
