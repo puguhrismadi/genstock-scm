@@ -25,7 +25,7 @@
               <h1
                 class="mb-4 text-xl text-center font-semibold text-gray-700 dark:text-gray-200"
               >
-                Create New Demande
+                Create New Demand
               </h1>
               @if(session('success'))
                   <div class="bg-green-100 text-center border border-green-400 text-green-700 px-4 py-2 mt-4">

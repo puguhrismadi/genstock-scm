@@ -132,6 +132,65 @@
           </span>
         
       </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+          // Check if MetaMask is installed
+          if (window.ethereum) {
+            // Initialize Web3.js with MetaMask's provider
+            window.web3 = new Web3(window.ethereum);
+      
+            // Request account access if needed
+            await window.ethereum.enable();
+    
+           
+          } else {
+            alert('MetaMask is not installed. Please install MetaMask and try again.');
+          }
+      
+          const sendTransactionButton = document.getElementById('sendTransactionButton');
+      
+          // Add click event listener to the button
+          sendTransactionButton.addEventListener('click', async function () {
+            try {
+              // Get the user's selected address
+              const accounts = await window.web3.eth.getAccounts();
+              const fromAddress = accounts[0];
+      
+              // Specify the transaction parameters
+              const transactionParameters = {
+                from: fromAddress,
+                to: '0x2278Ff216B544D55328DD9E7EDEA12836c905b15', // Replace with the recipient's address
+                value: window.web3.utils.toWei('1', 'ether'), // Replace with the amount to send
+              };
+      
+              // Send the transaction
+              const transactionHash = await window.web3.eth.sendTransaction(transactionParameters);
+      
+              console.log('Transaction Hash:', transactionHash);
+              alert('Transaction sent successfully! Transaction hash: ' + transactionHash);
+            } catch (error) {
+              console.error('Error sending transaction:', error);
+              alert('Error sending transaction. Please check the console for details.');
+            }
+          });
+        });
+    
+        
+      </script>
+      <div class="container">
+        <div class="col-md-6 p-4">
+     
+          <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+            Form Payment Send 1 ETH  : 
+          </h4>
+          <h5>Recipient Address : 0x2278Ff216B544D55328DD9E7EDEA12836c905b15 </h5>
+          <div class="container grid px-6 mx-auto">
+            <button class="w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" id="sendTransactionButton">Send Transaction</button>
+         
+          </div>
+        </div>
+      </div>
+
       </div>
     </div>
   </main>

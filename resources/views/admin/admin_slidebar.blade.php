@@ -209,7 +209,7 @@
           // Mendapatkan alamat akun metamask yang aktif
           let clickaccounts = await web3.eth.getAccounts ();
           let clickaddress = accounts [0];
-          console.log(clickaccounts);
+         // console.log(clickaccounts);
           //address.innerHTML = accounts[0];
           } catch (error) {
             console.error('Error getting Ethereum address:', error);

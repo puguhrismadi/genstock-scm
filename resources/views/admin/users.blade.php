@@ -240,5 +240,60 @@
 
 </div>
 </div>
+<script>
+  async function getEthereumAddress() {
+// Check if MetaMask is installed
+if (window.ethereum) {
+  try {
+    // Request access to the user's accounts
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
 
+    // Get the user's Ethereum address
+    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+
+    // Display the address
+  // alert('Ethereum Address: ' + accounts[0]);
+  myWallet = document.getElementById('idWallet');
+  address = document.getElementById('addressWallet');
+  myWallet.innerHTML= "Connected Wallet : "+accounts[0];
+  
+  const userAddress = accounts[0];
+  //account 
+  // Membuat objek web3 dengan provider rpc lokal
+  let web3 = new Web3 ('http://localhost:5545');
+
+  // Mendapatkan alamat akun metamask yang aktif
+  let clickaccounts = await web3.eth.getAccounts ();
+  let clickaddress = accounts [0];
+ // console.log(clickaccounts);
+  //address.innerHTML = accounts[0];
+  } catch (error) {
+    console.error('Error getting Ethereum address:', error);
+  }
+} else {
+  alert('MetaMask is not installed. Please install MetaMask and try again.');
+}
+}
+const decimalNumber = 1337;
+const hexadecimalValue = decimalNumber.toString(16);
+function addEthereumChain() {
+  ethereum
+    .request({
+      method: 'wallet_addEthereumChain',
+      params: [
+        {
+          chainId: '0x539',
+          chainName: 'Localhost 5545',
+          blockExplorerUrls: ['https://127.0.0.1:5545'],
+          nativeCurrency: { symbol: 'ETH', decimals: 18 },
+          rpcUrls: ['https://127.0.0.1:5545/'],
+        },
+      ],
+    })
+    .then((res) => console.log('add', res))
+    .catch((e) => console.log('ADD ERR', e));
+}
+//get balance
+
+</script>
 @endsection

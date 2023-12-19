@@ -9,7 +9,7 @@
       <h4
         class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
       >
-        Accceped Demandes
+        Accceped Demand
       </h4>
       @if(session('success'))
             <div class="bg-green-100 text-center border border-green-400 text-green-700 px-4 py-2 mt-4">
@@ -147,11 +147,32 @@
       </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="container grid px-6 mx-auto">
-        <button class="w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" id="sendTransactionButton">Send Transaction</button>
-      </div>
+    
+    <div class="col-md-6 p-4">
+      <div class="container">
+        <h4
+        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
+      >
+       Last Transaction Blockchain History
+      </h4>
+      <table class="w-full whitespace-no-wrap">
+        <thead>
+          <tr
+            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+          >
+            <th class="px-4 py-3">Transaction Hash</th>
 
+          </tr>
+        </thead>
+        <tbody
+          class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+        ><tr>
+          <td id="transactionHistory"></td>
+        </tr>
+        </tbody>
+      </table>
+       
+      </div>
     </div>
   </main>
   <script>
@@ -163,6 +184,21 @@
   
         // Request account access if needed
         await window.ethereum.enable();
+
+        //get list transactions 
+        // Get the user's selected address
+          const accounts = await window.web3.eth.getAccounts();
+          const userAddress = accounts[0];
+          const transactionHistoryContainer = document.getElementById('transactionHistory');
+          // Get transaction count for the user's address
+          const transactionCount = await window.web3.eth.getTransactionCount(userAddress);
+
+          // Display transaction history
+          for (let i = 0; i < transactionCount; i++) {
+              const transaction = await window.web3.eth.getTransactionFromBlock('latest', i);
+              const transactionHtml = `<div><strong>Transaction Hash:</strong> ${transaction.hash}<br><strong>From:</strong> ${transaction.from}<br><strong>To:</strong> ${transaction.to}<br><strong>Value:</strong> ${window.web3.utils.fromWei(transaction.value, 'ether')} ETH<br><br></div>`;
+              transactionHistoryContainer.innerHTML += transactionHtml;
+          }
       } else {
         alert('MetaMask is not installed. Please install MetaMask and try again.');
       }
@@ -194,5 +230,7 @@
         }
       });
     });
+
+    
   </script>
   @endsection

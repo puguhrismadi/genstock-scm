@@ -22,7 +22,7 @@
     defer
   ></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.js" integrity="sha512-VXYCt0jMr6DROBy4lTfWKAXLpS4SqACe2MNGXP5oebrgjXkK4wtslrc0L8/POJGWcHAHCzEmgN4/MbU2vGik5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
   </head>
   <body>
     <div
